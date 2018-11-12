@@ -1,3 +1,4 @@
+//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 #include <stdio.h>
 
 #include <string.h>
@@ -18,7 +19,7 @@ struct reg
 
 	char reg_num[4];
 
-}Reg[20]; // ·¹Áö½ºÅÍ¿¡ ´ëÇÑ ÀÌ¸§°ú ¹øÈ£¸¦ ÀúÀåÇÏ´Â ±¸Á¶Ã¼
+}Reg[20]; // ë ˆì§€ìŠ¤í„°ì— ëŒ€í•œ ì´ë¦„ê³¼ ë²ˆí˜¸ë¥¼ ì €ì¥í•˜ëŠ” êµ¬ì¡°ì²´
 
 
 
@@ -40,7 +41,7 @@ struct ins
 
 	char mod_reg[9];
 
-}Instr[100], modInstr[100], Instr2[100], modInstr2[100]; // °¢ ÀÎ½ºÆ®·°¼ÇÀÇ Á¤º¸¸¦ º¸°üÇÏ´Â ±¸Á¶Ã¼, obj ±¸Á¶Ã¼
+}Instr[100], modInstr[100], Instr2[100], modInstr2[100]; // ê° ì¸ìŠ¤íŠ¸ëŸ­ì…˜ì˜ ì •ë³´ë¥¼ ë³´ê´€í•˜ëŠ” êµ¬ì¡°ì²´, obj êµ¬ì¡°ì²´
 
 int MaxI, Maxll, InstrP = 0;
 
@@ -58,7 +59,7 @@ struct symbol_tbl
 
 	char data[10];
 
-} Symbol[30], Symbol2[30];  // ½Éº¼ Å×ÀÌºí
+} Symbol[30], Symbol2[30];  // ì‹¬ë³¼ í…Œì´ë¸”
 
 int MaxS = 0;
 
@@ -74,7 +75,7 @@ struct sentence
 
 	char operand[3][10];
 
-} Sen, Sen2; // ¿ø½Ã ÄÚµå ÀÓ½Ã ÀúÀå ±¸Á¶Ã¼
+} Sen, Sen2; // ì›ì‹œ ì½”ë“œ ì„ì‹œ ì €ì¥ êµ¬ì¡°ì²´
 
 int LC;
 
@@ -82,13 +83,13 @@ int LC2;
 
 
 
-FILE *ObjSave;  // objcode.txt ÀúÀå
+FILE *ObjSave;  // objcode.txt ì €ì¥
 
-FILE *SymbolSave; // symbol.txt ÀúÀå
+FILE *SymbolSave; // symbol.txt ì €ì¥
 
 
 
-				  // ÆÄÀÏ¿¡¼­ ·¹Áö½ºÅÍ¿Í ÀÎ½ºÆ®·°¼ÇÀÇ Á¤º¸¸¦ ÀĞ´Â´Ù.
+				  // íŒŒì¼ì—ì„œ ë ˆì§€ìŠ¤í„°ì™€ ì¸ìŠ¤íŠ¸ëŸ­ì…˜ì˜ ì •ë³´ë¥¼ ì½ëŠ”ë‹¤.
 
 void Initialize()
 
@@ -112,7 +113,7 @@ void Initialize()
 
 		i++;
 
-	} // ·¹Áö½ºÅÍ Å×ÀÌºíÀ» ÀÛ¼ºÇÑ´Ù.
+	} // ë ˆì§€ìŠ¤í„° í…Œì´ë¸”ì„ ì‘ì„±í•œë‹¤.
 
 
 
@@ -126,7 +127,7 @@ void Initialize()
 
 		j++;
 
-	} // ¸í·É¾î Å×ÀÌºíÀ» ÀÛ¼ºÇÑ´Ù.
+	} // ëª…ë ¹ì–´ í…Œì´ë¸”ì„ ì‘ì„±í•œë‹¤.
 
 
 
@@ -140,7 +141,7 @@ void Initialize()
 
 		j++;
 
-	} // ¸í·É¾î Å×ÀÌºíÀ» ÀÛ¼ºÇÑ´Ù.
+	} // ëª…ë ¹ì–´ í…Œì´ë¸”ì„ ì‘ì„±í•œë‹¤.
 
 	MaxI = j - 1;
 
@@ -162,11 +163,11 @@ int Analyze(char *operand)
 
 	char *regist[] = { "AX", "BX", "CX" ,"DX", "AL", "BL", "CL", "DL", "AH", "BH", "CH", "DH", 0x00 };
 
-	// ·¹Áö½ºÅÍ ÀÌ¸§À» ÀúÀå
+	// ë ˆì§€ìŠ¤í„° ì´ë¦„ì„ ì €ì¥
 
 
 
-	if (isdigit(operand[0])) return 0; // immediate ¾îµå·¹½º ¸ğµå¸¦ ÁöÁ¤
+	if (isdigit(operand[0])) return 0; // immediate ì–´ë“œë ˆìŠ¤ ëª¨ë“œë¥¼ ì§€ì •
 
 	else
 
@@ -180,9 +181,9 @@ int Analyze(char *operand)
 
 			{
 
-				if (i<4) return 1; // ·¹Áö½ºÅÍ ¹æ½Ä + ¿öµå
+				if (i<4) return 1; // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ì›Œë“œ
 
-				else return 2; // ·¹Áö½ºÅÍ ¹æ½Ä + ¹ÙÀÌÆ®
+				else return 2; // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ë°”ì´íŠ¸
 
 			}
 
@@ -192,15 +193,15 @@ int Analyze(char *operand)
 
 	}
 
-	return 3;   // ¸Ş¸ğ¸® ÁöÁ¤ ¹æ½Ä
+	return 3;   // ë©”ëª¨ë¦¬ ì§€ì • ë°©ì‹
 
 }
 
 
 
-#define MAX_INS 1   // ¸í·É¾îÀÇ ÃÖ´ë °³¼ö¸¦ ÁöÁ¤
+#define MAX_INS 1   // ëª…ë ¹ì–´ì˜ ìµœëŒ€ ê°œìˆ˜ë¥¼ ì§€ì •
 
-int Mov_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
+int Mov_Chk(char *sen) // ì˜¤í¼ëœë“œì˜ ì–´ë“œë ˆìŠ¤ ëª¨ë“œë¥¼ íŒì •
 
 {
 
@@ -216,7 +217,7 @@ int Mov_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	{
 
-		while (sen[wp] == ' ' || sen[wp] == '\t' || sen[wp] == ', ')wp++;// °ø¹é, ÅÇ, ÄŞ¸¶´Â Åë°ú
+		while (sen[wp] == ' ' || sen[wp] == '\t' || sen[wp] == ', ')wp++;// ê³µë°±, íƒ­, ì½¤ë§ˆëŠ” í†µê³¼
 
 		while (sen[wp] != ' ' && sen[wp] != '\n' && sen[wp] != ', ')
 
@@ -240,21 +241,21 @@ int Mov_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	i = 0;
 
-	while (strcmp(opcode[i], ""))  // µî·ÏµÈ ¸í·É¾îÀÇ ³¡±îÁö ºñ±³
+	while (strcmp(opcode[i], ""))  // ë“±ë¡ëœ ëª…ë ¹ì–´ì˜ ëê¹Œì§€ ë¹„êµ
 
 	{
 
-		if (stricmp(opcode[i], op[0]))i++; //mov ¸í·É¾î¿Í op[0]ÀÌ ´Ù¸£¸é, ´ÙÀ½ ¸í·É¾î Á¶È¸
+		if (stricmp(opcode[i], op[0]))i++; //mov ëª…ë ¹ì–´ì™€ op[0]ì´ ë‹¤ë¥´ë©´, ë‹¤ìŒ ëª…ë ¹ì–´ ì¡°íšŒ
 
 		else
 
 		{
 
-			strcpy(Sen._operator, op[0]);  // ¸í·É¾î¸¦ _operator¿¡ ÀúÀå
+			strcpy(Sen._operator, op[0]);  // ëª…ë ¹ì–´ë¥¼ _operatorì— ì €ì¥
 
 			for (l = 1; l<j; l++)
 
-				strcpy(Sen.operand[l - 1], op[l]); // ¸í·É¾î µŞ ³»¿ëÀ» operand¿¡ ÀúÀå
+				strcpy(Sen.operand[l - 1], op[l]); // ëª…ë ¹ì–´ ë’· ë‚´ìš©ì„ operandì— ì €ì¥
 
 			break;
 
@@ -262,69 +263,69 @@ int Mov_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	}
 
-	if (i == MAX_INS)//i=1ÀÌ¸é, ¸í·É¾î¸¦ Ã£Áö ¸øÇÑ °Í(¸í·É¾î 1°³ ±âÁØ)
+	if (i == MAX_INS)//i=1ì´ë©´, ëª…ë ¹ì–´ë¥¼ ì°¾ì§€ ëª»í•œ ê²ƒ(ëª…ë ¹ì–´ 1ê°œ ê¸°ì¤€)
 
 	{
 
-		strcpy(Sen.label, op[0]);   // ÀÌ °æ¿ì Ã¹ ´Ü¾î¸¦ ·¹ÀÌºí¿¡ µî·Ï
+		strcpy(Sen.label, op[0]);   // ì´ ê²½ìš° ì²« ë‹¨ì–´ë¥¼ ë ˆì´ë¸”ì— ë“±ë¡
 
-		strcpy(Sen._operator, op[1]);  // µÎ¹øÂ° ´Ü¾î¸¦ ¸í·É¾î¿¡ µî·Ï
+		strcpy(Sen._operator, op[1]);  // ë‘ë²ˆì§¸ ë‹¨ì–´ë¥¼ ëª…ë ¹ì–´ì— ë“±ë¡
 
 		for (l = 2; l<j; l++)
 
-			strcpy(Sen.operand[l - 2], op[l]); // ±× ´ÙÀ½ ³»¿ëÀ» operand¿¡ ÀúÀå
+			strcpy(Sen.operand[l - 2], op[l]); // ê·¸ ë‹¤ìŒ ë‚´ìš©ì„ operandì— ì €ì¥
 
-	}// ÇÑ ¹®ÀåÀ» ºĞ¼®ÇÏ¿© ·¹ÀÌºí, ¿ÀÆÛ·¹ÀÌÅÍ¿Í ¿ÀÆÛ·£µå·Î ºĞ·ùÇÑ´Ù.
+	}// í•œ ë¬¸ì¥ì„ ë¶„ì„í•˜ì—¬ ë ˆì´ë¸”, ì˜¤í¼ë ˆì´í„°ì™€ ì˜¤í¼ëœë“œë¡œ ë¶„ë¥˜í•œë‹¤.
 
-	strcpy(Instr[0].instruct, op[0]);  // ¸í·É¾î¸¦ instruct¿¡ ÀúÀå
+	strcpy(Instr[0].instruct, op[0]);  // ëª…ë ¹ì–´ë¥¼ instructì— ì €ì¥
 
-	switch (Analyze(op[1])) // µµÂøÁö ºĞ¼®
+	switch (Analyze(op[1])) // ë„ì°©ì§€ ë¶„ì„
 
 	{
 
-	case 0: strcpy(Instr[0].dest, "i");  // °ª Áï½Ã ÀÔ·Â ¹æ½Ä
+	case 0: strcpy(Instr[0].dest, "i");  // ê°’ ì¦‰ì‹œ ì…ë ¥ ë°©ì‹
 
 		break;
 
-	case 1: strcpy(Instr[0].dest, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¿öµå
+	case 1: strcpy(Instr[0].dest, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ì›Œë“œ
 
 		strcpy(Instr[0].word_type, "w");
 
 		break;
 
-	case 2: strcpy(Instr[0].dest, "r"); // ·¹Áö½ºÅÍ¹æ½Ä + ¹ÙÀÌÆ®
+	case 2: strcpy(Instr[0].dest, "r"); // ë ˆì§€ìŠ¤í„°ë°©ì‹ + ë°”ì´íŠ¸
 
 		strcpy(Instr[0].word_type, "b");
 
 		break;
 
-	case 3: strcpy(Instr[0].dest, "m"); // ¸Ş¸ğ¸® ÁöÁ¤ ¹æ½Ä
+	case 3: strcpy(Instr[0].dest, "m"); // ë©”ëª¨ë¦¬ ì§€ì • ë°©ì‹
 
 		break;
 
 	}
 
-	switch (Analyze(op[2]))   // Ãâ¹ßÁö ºĞ¼®
+	switch (Analyze(op[2]))   // ì¶œë°œì§€ ë¶„ì„
 
 	{
 
-	case 0: strcpy(Instr[0].sour, "i"); // °ª Áï½Ã ÀÔ·Â ¹æ½Ä
+	case 0: strcpy(Instr[0].sour, "i"); // ê°’ ì¦‰ì‹œ ì…ë ¥ ë°©ì‹
 
 		break;
 
-	case 1: strcpy(Instr[0].sour, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¿öµå
+	case 1: strcpy(Instr[0].sour, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ì›Œë“œ
 
 		strcpy(Instr[0].word_type, "w");
 
 		break;
 
-	case 2: strcpy(Instr[0].sour, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¹ÙÀÌÆ®
+	case 2: strcpy(Instr[0].sour, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ë°”ì´íŠ¸
 
 		strcpy(Instr[0].word_type, "b");
 
 		break;
 
-	case 3: strcpy(Instr[0].sour, "m"); // ¸Ş¸ğ¸® ÁöÁ¤ ¹æ½Ä
+	case 3: strcpy(Instr[0].sour, "m"); // ë©”ëª¨ë¦¬ ì§€ì • ë°©ì‹
 
 		break;
 
@@ -334,19 +335,19 @@ int Mov_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 		|| strcmp(Instr[k].sour, Instr[0].sour) || strcmp(Instr[k].word_type, Instr[0].word_type))
 
-	{    // instruct, Áï ÇöÀç ¸í·É¾î¿Í,inst.tbl¿¡¼­ °¡Á®¿Â ¸í·É¾î¸¦ ºñ±³
+	{    // instruct, ì¦‰ í˜„ì¬ ëª…ë ¹ì–´ì™€,inst.tblì—ì„œ ê°€ì ¸ì˜¨ ëª…ë ¹ì–´ë¥¼ ë¹„êµ
 
-		k--;  // °°Àº °ªÀ» Ã£À» ¶§±îÁö,k¸¦ °¨¼ÒÇÏ¸ç ºñ±³
+		k--;  // ê°™ì€ ê°’ì„ ì°¾ì„ ë•Œê¹Œì§€,kë¥¼ ê°ì†Œí•˜ë©° ë¹„êµ
 
 	}
 
-	return k; // Ã£Àº ÀÎµ¦½º k¸¦ ¸®ÅÏ
+	return k; // ì°¾ì€ ì¸ë±ìŠ¤ kë¥¼ ë¦¬í„´
 
 }
 
 
 
-int Add_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
+int Add_Chk(char *sen) // ì˜¤í¼ëœë“œì˜ ì–´ë“œë ˆìŠ¤ ëª¨ë“œë¥¼ íŒì •
 
 {
 
@@ -362,7 +363,7 @@ int Add_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	{
 
-		while (sen[wp] == ' ' || sen[wp] == '\t' || sen[wp] == ', ')wp++;// °ø¹é, ÅÇ, ÄŞ¸¶´Â Åë°ú
+		while (sen[wp] == ' ' || sen[wp] == '\t' || sen[wp] == ', ')wp++;// ê³µë°±, íƒ­, ì½¤ë§ˆëŠ” í†µê³¼
 
 		while (sen[wp] != ' ' && sen[wp] != '\n' && sen[wp] != ', ')
 
@@ -386,21 +387,21 @@ int Add_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	i = 0;
 
-	while (strcmp(opcode[i], ""))  // µî·ÏµÈ ¸í·É¾îÀÇ ³¡±îÁö ºñ±³
+	while (strcmp(opcode[i], ""))  // ë“±ë¡ëœ ëª…ë ¹ì–´ì˜ ëê¹Œì§€ ë¹„êµ
 
 	{
 
-		if (stricmp(opcode[i], op[0]))i++; //add ¸í·É¾î¿Í op[0]ÀÌ ´Ù¸£¸é, ´ÙÀ½ ¸í·É¾î Á¶È¸
+		if (stricmp(opcode[i], op[0]))i++; //add ëª…ë ¹ì–´ì™€ op[0]ì´ ë‹¤ë¥´ë©´, ë‹¤ìŒ ëª…ë ¹ì–´ ì¡°íšŒ
 
 		else
 
 		{
 
-			strcpy(Sen2._operator, op[0]);  // ¸í·É¾î¸¦ _operator¿¡ ÀúÀå
+			strcpy(Sen2._operator, op[0]);  // ëª…ë ¹ì–´ë¥¼ _operatorì— ì €ì¥
 
 			for (l = 1; l<j; l++)
 
-				strcpy(Sen2.operand[l - 1], op[l]); // ¸í·É¾î µŞ ³»¿ëÀ» operand¿¡ ÀúÀå
+				strcpy(Sen2.operand[l - 1], op[l]); // ëª…ë ¹ì–´ ë’· ë‚´ìš©ì„ operandì— ì €ì¥
 
 			break;
 
@@ -408,69 +409,69 @@ int Add_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 	}
 
-	if (i == MAX_INS)//i=1ÀÌ¸é, ¸í·É¾î¸¦ Ã£Áö ¸øÇÑ °Í(¸í·É¾î 1°³ ±âÁØ)
+	if (i == MAX_INS)//i=1ì´ë©´, ëª…ë ¹ì–´ë¥¼ ì°¾ì§€ ëª»í•œ ê²ƒ(ëª…ë ¹ì–´ 1ê°œ ê¸°ì¤€)
 
 	{
 
-		strcpy(Sen2.label, op[0]);   // ÀÌ °æ¿ì Ã¹ ´Ü¾î¸¦ ·¹ÀÌºí¿¡ µî·Ï
+		strcpy(Sen2.label, op[0]);   // ì´ ê²½ìš° ì²« ë‹¨ì–´ë¥¼ ë ˆì´ë¸”ì— ë“±ë¡
 
-		strcpy(Sen2._operator, op[1]);  // µÎ¹øÂ° ´Ü¾î¸¦ ¸í·É¾î¿¡ µî·Ï
+		strcpy(Sen2._operator, op[1]);  // ë‘ë²ˆì§¸ ë‹¨ì–´ë¥¼ ëª…ë ¹ì–´ì— ë“±ë¡
 
 		for (l = 2; l<j; l++)
 
-			strcpy(Sen2.operand[l - 2], op[l]); // ±× ´ÙÀ½ ³»¿ëÀ» operand¿¡ ÀúÀå
+			strcpy(Sen2.operand[l - 2], op[l]); // ê·¸ ë‹¤ìŒ ë‚´ìš©ì„ operandì— ì €ì¥
 
-	}// ÇÑ ¹®ÀåÀ» ºĞ¼®ÇÏ¿© ·¹ÀÌºí, ¿ÀÆÛ·¹ÀÌÅÍ¿Í ¿ÀÆÛ·£µå·Î ºĞ·ùÇÑ´Ù.
+	}// í•œ ë¬¸ì¥ì„ ë¶„ì„í•˜ì—¬ ë ˆì´ë¸”, ì˜¤í¼ë ˆì´í„°ì™€ ì˜¤í¼ëœë“œë¡œ ë¶„ë¥˜í•œë‹¤.
 
-	strcpy(Instr2[0].instruct, op[0]);  // ¸í·É¾î¸¦ instruct¿¡ ÀúÀå
+	strcpy(Instr2[0].instruct, op[0]);  // ëª…ë ¹ì–´ë¥¼ instructì— ì €ì¥
 
-	switch (Analyze(op[1])) // µµÂøÁö ºĞ¼®
+	switch (Analyze(op[1])) // ë„ì°©ì§€ ë¶„ì„
 
 	{
 
-	case 0: strcpy(Instr2[0].dest, "i");  // °ª Áï½Ã ÀÔ·Â ¹æ½Ä
+	case 0: strcpy(Instr2[0].dest, "i");  // ê°’ ì¦‰ì‹œ ì…ë ¥ ë°©ì‹
 
 		break;
 
-	case 1: strcpy(Instr2[0].dest, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¿öµå
+	case 1: strcpy(Instr2[0].dest, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ì›Œë“œ
 
 		strcpy(Instr2[0].word_type, "w");
 
 		break;
 
-	case 2: strcpy(Instr2[0].dest, "r"); // ·¹Áö½ºÅÍ¹æ½Ä + ¹ÙÀÌÆ®
+	case 2: strcpy(Instr2[0].dest, "r"); // ë ˆì§€ìŠ¤í„°ë°©ì‹ + ë°”ì´íŠ¸
 
 		strcpy(Instr2[0].word_type, "b");
 
 		break;
 
-	case 3: strcpy(Instr2[0].dest, "m"); // ¸Ş¸ğ¸® ÁöÁ¤ ¹æ½Ä
+	case 3: strcpy(Instr2[0].dest, "m"); // ë©”ëª¨ë¦¬ ì§€ì • ë°©ì‹
 
 		break;
 
 	}
 
-	switch (Analyze(op[2]))   // Ãâ¹ßÁö ºĞ¼®
+	switch (Analyze(op[2]))   // ì¶œë°œì§€ ë¶„ì„
 
 	{
 
-	case 0: strcpy(Instr2[0].sour, "i"); // °ª Áï½Ã ÀÔ·Â ¹æ½Ä
+	case 0: strcpy(Instr2[0].sour, "i"); // ê°’ ì¦‰ì‹œ ì…ë ¥ ë°©ì‹
 
 		break;
 
-	case 1: strcpy(Instr2[0].sour, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¿öµå
+	case 1: strcpy(Instr2[0].sour, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ì›Œë“œ
 
 		strcpy(Instr2[0].word_type, "w");
 
 		break;
 
-	case 2: strcpy(Instr2[0].sour, "r"); // ·¹Áö½ºÅÍ ¹æ½Ä + ¹ÙÀÌÆ®
+	case 2: strcpy(Instr2[0].sour, "r"); // ë ˆì§€ìŠ¤í„° ë°©ì‹ + ë°”ì´íŠ¸
 
 		strcpy(Instr2[0].word_type, "b");
 
 		break;
 
-	case 3: strcpy(Instr2[0].sour, "m"); // ¸Ş¸ğ¸® ÁöÁ¤ ¹æ½Ä
+	case 3: strcpy(Instr2[0].sour, "m"); // ë©”ëª¨ë¦¬ ì§€ì • ë°©ì‹
 
 		break;
 
@@ -480,13 +481,13 @@ int Add_Chk(char *sen) // ¿ÀÆÛ·£µåÀÇ ¾îµå·¹½º ¸ğµå¸¦ ÆÇÁ¤
 
 		|| strcmp(Instr2[k].sour, Instr2[0].sour) || strcmp(Instr2[k].word_type, Instr2[0].word_type))
 
-	{    // instruct, Áï ÇöÀç ¸í·É¾î¿Í,inst.tbl¿¡¼­ °¡Á®¿Â ¸í·É¾î¸¦ ºñ±³
+	{    // instruct, ì¦‰ í˜„ì¬ ëª…ë ¹ì–´ì™€,inst.tblì—ì„œ ê°€ì ¸ì˜¨ ëª…ë ¹ì–´ë¥¼ ë¹„êµ
 
-		k--;  // °°Àº °ªÀ» Ã£À» ¶§±îÁö,k¸¦ °¨¼ÒÇÏ¸ç ºñ±³
+		k--;  // ê°™ì€ ê°’ì„ ì°¾ì„ ë•Œê¹Œì§€,kë¥¼ ê°ì†Œí•˜ë©° ë¹„êµ
 
 	}
 
-	return k; // Ã£Àº ÀÎµ¦½º k¸¦ ¸®ÅÏ
+	return k; // ì°¾ì€ ì¸ë±ìŠ¤ kë¥¼ ë¦¬í„´
 
 }
 
@@ -506,43 +507,43 @@ void PassI(char *buf)
 
 	i = Mov_Chk(buf);
 
-	// ¿ø½Ã ÄÚµåÀÇ ¸í·É¾î¿Í ÁÖ¼Ò ¹æ½ÄÀ» ¸®ÅÏ ¹ŞÀ½.
+	// ì›ì‹œ ì½”ë“œì˜ ëª…ë ¹ì–´ì™€ ì£¼ì†Œ ë°©ì‹ì„ ë¦¬í„´ ë°›ìŒ.
 
-	if (i) // mov ¸í·É¾î¿¡ ´ëÇÑ Ã³¸®
+	if (i) // mov ëª…ë ¹ì–´ì— ëŒ€í•œ ì²˜ë¦¬
 
 	{
 
-		printf("%04X:%s", LC, buf); // ÁÖ¼Ò°ª, ¿ø½Ã ÄÚµå Ãâ·Â
+		printf("%04X:%s", LC, buf); // ì£¼ì†Œê°’, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
-		LC += atoi(Instr[i].ins_len); // LC=LC+ ¸í·É¾î ±æÀÌ
+		LC += atoi(Instr[i].ins_len); // LC=LC+ ëª…ë ¹ì–´ ê¸¸ì´
 
 	}
 
-	else // ±âÈ£¿¡ ´ëÇÑ Ã³¸®
+	else // ê¸°í˜¸ì— ëŒ€í•œ ì²˜ë¦¬
 
 	{
 
 		if (!stricmp(Sen._operator, "dw"))
 
-			strcpy(Symbol[j].word_type, "w");  // dw ¶ó¸é w¸¦ ÀúÀå
+			strcpy(Symbol[j].word_type, "w");  // dw ë¼ë©´ wë¥¼ ì €ì¥
 
 		else if (!stricmp(Sen._operator, "db"))
 
-			strcpy(Symbol[j].word_type, "b"); // db¶ó¸é b¸¦ ÀúÀå
+			strcpy(Symbol[j].word_type, "b"); // dbë¼ë©´ bë¥¼ ì €ì¥
 
-		strcpy(Symbol[j].symbol, Sen.label); // ·¹ÀÌºíÀ» ½Éº¼¿¡ ÀúÀå
+		strcpy(Symbol[j].symbol, Sen.label); // ë ˆì´ë¸”ì„ ì‹¬ë³¼ì— ì €ì¥
 
-		strcpy(Symbol[j].data, Sen.operand[0]); // ·¹ÀÌºíÀÇ °ªÀ» ÀúÀå
+		strcpy(Symbol[j].data, Sen.operand[0]); // ë ˆì´ë¸”ì˜ ê°’ì„ ì €ì¥
 
-		Symbol[j].lc = LC;    // ÁÖ¼Ò°ªÀ» ÀúÀå
+		Symbol[j].lc = LC;    // ì£¼ì†Œê°’ì„ ì €ì¥
 
-		printf("%04X:%s", LC, buf);  // ÁÖ¼Ò°ª, ¿ø½Ã ÄÚµå Ãâ·Â
+		printf("%04X:%s", LC, buf);  // ì£¼ì†Œê°’, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
-		if (*Symbol[j].word_type == 'w') LC += 2; // ÁÖ¼Ò°ªÀ» w=2,b=1¸¸Å­ Áõ°¡
+		if (*Symbol[j].word_type == 'w') LC += 2; // ì£¼ì†Œê°’ì„ w=2,b=1ë§Œí¼ ì¦ê°€
 
 		else if (*Symbol[j].word_type == 'b') LC += 1;
 
-		j++;  //j¸¦ Áõ°¡½ÃÄÑ ´ÙÀ½¹ø ½Éº¼ ÀÎµ¦½º¸¦ ¸ÂÃçÁÜ.
+		j++;  //jë¥¼ ì¦ê°€ì‹œì¼œ ë‹¤ìŒë²ˆ ì‹¬ë³¼ ì¸ë±ìŠ¤ë¥¼ ë§ì¶°ì¤Œ.
 
 		MaxS++;
 
@@ -552,43 +553,43 @@ void PassI(char *buf)
 
 	ii = Add_Chk(buf);
 
-	// ¿ø½Ã ÄÚµåÀÇ ¸í·É¾î¿Í ÁÖ¼Ò ¹æ½ÄÀ» ¸®ÅÏ ¹ŞÀ½.
+	// ì›ì‹œ ì½”ë“œì˜ ëª…ë ¹ì–´ì™€ ì£¼ì†Œ ë°©ì‹ì„ ë¦¬í„´ ë°›ìŒ.
 
-	if (ii) // add ¸í·É¾î¿¡ ´ëÇÑ Ã³¸®
+	if (ii) // add ëª…ë ¹ì–´ì— ëŒ€í•œ ì²˜ë¦¬
 
 	{
 
-		// printf("%04X:%s", LC, buf); // ÁÖ¼Ò°ª, ¿ø½Ã ÄÚµå Ãâ·Â
+		// printf("%04X:%s", LC, buf); // ì£¼ì†Œê°’, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
-		LC2 += atoi(Instr2[ii].ins_len); // LC=LC+ ¸í·É¾î ±æÀÌ
+		LC2 += atoi(Instr2[ii].ins_len); // LC=LC+ ëª…ë ¹ì–´ ê¸¸ì´
 
 	}
 
-	else // ±âÈ£¿¡ ´ëÇÑ Ã³¸®
+	else // ê¸°í˜¸ì— ëŒ€í•œ ì²˜ë¦¬
 
 	{
 
 		if (!stricmp(Sen2._operator, "dw"))
 
-			strcpy(Symbol2[jj].word_type, "w");  // dw ¶ó¸é w¸¦ ÀúÀå
+			strcpy(Symbol2[jj].word_type, "w");  // dw ë¼ë©´ wë¥¼ ì €ì¥
 
 		else if (!stricmp(Sen2._operator, "db"))
 
-			strcpy(Symbol2[jj].word_type, "b"); // db¶ó¸é b¸¦ ÀúÀå
+			strcpy(Symbol2[jj].word_type, "b"); // dbë¼ë©´ bë¥¼ ì €ì¥
 
-		strcpy(Symbol2[jj].symbol, Sen2.label); // ·¹ÀÌºíÀ» ½Éº¼¿¡ ÀúÀå
+		strcpy(Symbol2[jj].symbol, Sen2.label); // ë ˆì´ë¸”ì„ ì‹¬ë³¼ì— ì €ì¥
 
-		strcpy(Symbol2[jj].data, Sen2.operand[0]); // ·¹ÀÌºíÀÇ °ªÀ» ÀúÀå
+		strcpy(Symbol2[jj].data, Sen2.operand[0]); // ë ˆì´ë¸”ì˜ ê°’ì„ ì €ì¥
 
-		Symbol2[jj].lc = LC2;    // ÁÖ¼Ò°ªÀ» ÀúÀå
+		Symbol2[jj].lc = LC2;    // ì£¼ì†Œê°’ì„ ì €ì¥
 
-								 // printf("%04X:%s", LC, buf);  // ÁÖ¼Ò°ª, ¿ø½Ã ÄÚµå Ãâ·Â
+								 // printf("%04X:%s", LC, buf);  // ì£¼ì†Œê°’, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
-		if (*Symbol2[jj].word_type == 'w') LC2 += 2; // ÁÖ¼Ò°ªÀ» w=2,b=1¸¸Å­ Áõ°¡
+		if (*Symbol2[jj].word_type == 'w') LC2 += 2; // ì£¼ì†Œê°’ì„ w=2,b=1ë§Œí¼ ì¦ê°€
 
 		else if (*Symbol2[jj].word_type == 'b') LC2 += 1;
 
-		jj++;  //j¸¦ Áõ°¡½ÃÄÑ ´ÙÀ½¹ø ½Éº¼ ÀÎµ¦½º¸¦ ¸ÂÃçÁÜ.
+		jj++;  //jë¥¼ ì¦ê°€ì‹œì¼œ ë‹¤ìŒë²ˆ ì‹¬ë³¼ ì¸ë±ìŠ¤ë¥¼ ë§ì¶°ì¤Œ.
 
 		MaxS++;
 
@@ -612,9 +613,9 @@ int btoi(char *dig)
 
 		if (*(dig + i) == '1') ret += pow(2, strlen(dig + i) - 1);
 
-		//dig+iÀÇ ±æÀÌ´Â dig(8)+i(0)À¸·Î -1ÇÏ¸é 7ÀÌ´Ù.
+		//dig+iì˜ ê¸¸ì´ëŠ” dig(8)+i(0)ìœ¼ë¡œ -1í•˜ë©´ 7ì´ë‹¤.
 
-		// ±âÁØÁ¡ÀÎ i°¡ Áõ°¡ÇÏ¹Ç·Î,7,6,5,4,3,2,1,0À¸·Î ÁÙ¾îµç´Ù.
+		// ê¸°ì¤€ì ì¸ iê°€ ì¦ê°€í•˜ë¯€ë¡œ,7,6,5,4,3,2,1,0ìœ¼ë¡œ ì¤„ì–´ë“ ë‹¤.
 
 		i++;
 
@@ -636,21 +637,21 @@ void PassII(char *buf)
 
 	i = Mov_Chk(buf);
 
-	if (i) //i!=0ÀÏ ¶§, Áï ¸í·É¾îÀÏ °æ¿ì,
+	if (i) //i!=0ì¼ ë•Œ, ì¦‰ ëª…ë ¹ì–´ì¼ ê²½ìš°,
 
 	{
 
 		modInstr[InstrP] = Instr[i];
 
-		printf("%04x:%3s", LC, Instr[i].ins_code); // LC¿Í ¸í·É¾î ÄÚµå Ãâ·Â
+		printf("%04x:%3s", LC, Instr[i].ins_code); // LCì™€ ëª…ë ¹ì–´ ì½”ë“œ ì¶œë ¥
 
 		fprintf(ObjSave, "%04x:%3s", LC, Instr[i].ins_code);
 
-		if (!strcmp(Instr[i].dest, "r"))  // µµÂøÁö°¡ rÀÌ¸é
+		if (!strcmp(Instr[i].dest, "r"))  // ë„ì°©ì§€ê°€ rì´ë©´
 
 		{
 
-			while (stricmp(Reg[j].reg_name, Sen.operand[0]))  // µµÂøÁö¿Í ·¹Áö½ºÅÍ ÀÌ¸§ÀÌ °°°Ô ¸ÂÃã
+			while (stricmp(Reg[j].reg_name, Sen.operand[0]))  // ë„ì°©ì§€ì™€ ë ˆì§€ìŠ¤í„° ì´ë¦„ì´ ê°™ê²Œ ë§ì¶¤
 
 				j++;
 
@@ -662,51 +663,51 @@ void PassII(char *buf)
 
 		j = 0;
 
-		if (!strcmp(Instr[i].sour, "r"))// Ãâ¹ßÁö°¡ rÀÌ¸é
+		if (!strcmp(Instr[i].sour, "r"))// ì¶œë°œì§€ê°€ rì´ë©´
 
 		{
 
-			while (stricmp(Reg[j].reg_name, Sen.operand[1]))  // Ãâ¹ßÁö¿Í ·¹Áö½ºÅÍ ÀÌ¸§ÀÌ °°°Ô ¸ÂÃã
+			while (stricmp(Reg[j].reg_name, Sen.operand[1]))  // ì¶œë°œì§€ì™€ ë ˆì§€ìŠ¤í„° ì´ë¦„ì´ ê°™ê²Œ ë§ì¶¤
 
 				j++;
 
 			strncpy(strchr(modInstr[InstrP].mod_reg, '?'), Reg[j].reg_num, 3);
 
-			//???¸¦ ·¹Áö½ºÅÍ Ç¥ÀÇ °ªÀ¸·Î Ã¤¿ò
+			//???ë¥¼ ë ˆì§€ìŠ¤í„° í‘œì˜ ê°’ìœ¼ë¡œ ì±„ì›€
 
 		}
 
 
 
-		if (strcmp(Instr[i].dest, "m") && strcmp(Instr[i].sour, "m")) // µµÂøÁö, Ãâ¹ßÁö°¡ µÑ´Ù mÀÌ ¾Æ´Ï¸é
+		if (strcmp(Instr[i].dest, "m") && strcmp(Instr[i].sour, "m")) // ë„ì°©ì§€, ì¶œë°œì§€ê°€ ë‘˜ë‹¤ mì´ ì•„ë‹ˆë©´
 
 		{
 
 			printf("%02X\t\t%s", btoi(modInstr[InstrP].mod_reg), buf);
 
-			//InstrÀÇ ¸í·É¾î ÄÚµå¸¦ 16Áø¼ö º¯È¯ ÈÄ Ãâ·Â, ¿ø½Ã ÄÚµå Ãâ·Â
+			//Instrì˜ ëª…ë ¹ì–´ ì½”ë“œë¥¼ 16ì§„ìˆ˜ ë³€í™˜ í›„ ì¶œë ¥, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
 			fprintf(ObjSave, "%02X\t\t%s", btoi(modInstr[InstrP].mod_reg), buf);
 
 		}
 
-		else// µµÂøÁö or Ãâ¹ßÁö¿¡ ±âÈ£°¡ µé¾î°£ °æ¿ì
+		else// ë„ì°©ì§€ or ì¶œë°œì§€ì— ê¸°í˜¸ê°€ ë“¤ì–´ê°„ ê²½ìš°
 
 		{
 
-			if (!strcmp(Instr[i].dest, "m"))  // µµÂøÁö°¡ mÀÎ °æ¿ì
+			if (!strcmp(Instr[i].dest, "m"))  // ë„ì°©ì§€ê°€ mì¸ ê²½ìš°
 
 				while (strcmp(Symbol[k].symbol, Sen.operand[0]))k++;
 
-			// ½Éº¼°ú °°Àº operand¸¦ Ã£À½. Áï ±âÈ£¸¦ Ã£À½
+			// ì‹¬ë³¼ê³¼ ê°™ì€ operandë¥¼ ì°¾ìŒ. ì¦‰ ê¸°í˜¸ë¥¼ ì°¾ìŒ
 
-			else if (!strcmp(Instr[i].sour, "m"))  // Ãâ¹ßÁö°¡ mÀÎ °æ¿ì
+			else if (!strcmp(Instr[i].sour, "m"))  // ì¶œë°œì§€ê°€ mì¸ ê²½ìš°
 
 				while (strcmp(Symbol[k].symbol, Sen.operand[1]))k++;
 
-			// ½Éº¼°ú °°Àº operand¸¦ Ã£À½. Áï ±âÈ£¸¦ Ã£À½
+			// ì‹¬ë³¼ê³¼ ê°™ì€ operandë¥¼ ì°¾ìŒ. ì¦‰ ê¸°í˜¸ë¥¼ ì°¾ìŒ
 
-			if (Symbol[k].lc == (atoi(Symbol[k].data))) // °°À¸¸é, Àç¹èÄ¡ ºÒÇÊ¿ä
+			if (Symbol[k].lc == (atoi(Symbol[k].data))) // ê°™ìœ¼ë©´, ì¬ë°°ì¹˜ ë¶ˆí•„ìš”
 
 			{
 
@@ -716,7 +717,7 @@ void PassII(char *buf)
 
 			}
 
-			else // ´Ù¸£¸é Àç¹èÄ¡ ÇÊ¿ä
+			else // ë‹¤ë¥´ë©´ ì¬ë°°ì¹˜ í•„ìš”
 
 			{
 
@@ -724,13 +725,13 @@ void PassII(char *buf)
 
 				fprintf(ObjSave, " %02X\t%04XR\t%s", btoi(modInstr[InstrP].mod_reg), Symbol[k].lc, buf);
 
-				//InstrÀÇ ¸í·É¾î ÄÚµå¸¦ 16Áø¼ö º¯È¯ ÈÄ Ãâ·Â, ¿ø½Ã ÄÚµå Ãâ·Â
+				//Instrì˜ ëª…ë ¹ì–´ ì½”ë“œë¥¼ 16ì§„ìˆ˜ ë³€í™˜ í›„ ì¶œë ¥, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
 			}
 
 		}
 
-		LC += atoi(Instr[i].ins_len);  //LC=LC+ ¸í·É¾î ±æÀÌ
+		LC += atoi(Instr[i].ins_len);  //LC=LC+ ëª…ë ¹ì–´ ê¸¸ì´
 
 	}
 
@@ -740,21 +741,21 @@ void PassII(char *buf)
 
 	ii = Add_Chk(buf);
 
-	if (ii) //ii!=0ÀÏ ¶§, Áï ¸í·É¾îÀÏ °æ¿ì,
+	if (ii) //ii!=0ì¼ ë•Œ, ì¦‰ ëª…ë ¹ì–´ì¼ ê²½ìš°,
 
 	{
 
 		modInstr2[InstrP] = Instr2[ii];
 
-		printf("%04x:%3s", LC2, Instr2[ii].ins_code); // LC¿Í ¸í·É¾î ÄÚµå Ãâ·Â
+		printf("%04x:%3s", LC2, Instr2[ii].ins_code); // LCì™€ ëª…ë ¹ì–´ ì½”ë“œ ì¶œë ¥
 
 		fprintf(ObjSave, "%04x:%3s", LC2, Instr2[ii].ins_code);
 
-		if (!strcmp(Instr2[ii].dest, "r"))  // µµÂøÁö°¡ rÀÌ¸é
+		if (!strcmp(Instr2[ii].dest, "r"))  // ë„ì°©ì§€ê°€ rì´ë©´
 
 		{
 
-			while (stricmp(Reg[jj].reg_name, Sen2.operand[0]))  // µµÂøÁö¿Í ·¹Áö½ºÅÍ ÀÌ¸§ÀÌ °°°Ô ¸ÂÃã
+			while (stricmp(Reg[jj].reg_name, Sen2.operand[0]))  // ë„ì°©ì§€ì™€ ë ˆì§€ìŠ¤í„° ì´ë¦„ì´ ê°™ê²Œ ë§ì¶¤
 
 				jj++;
 
@@ -766,51 +767,51 @@ void PassII(char *buf)
 
 		jj = 0;
 
-		if (!strcmp(Instr2[ii].sour, "r"))// Ãâ¹ßÁö°¡ rÀÌ¸é
+		if (!strcmp(Instr2[ii].sour, "r"))// ì¶œë°œì§€ê°€ rì´ë©´
 
 		{
 
-			while (stricmp(Reg[jj].reg_name, Sen2.operand[1]))  // Ãâ¹ßÁö¿Í ·¹Áö½ºÅÍ ÀÌ¸§ÀÌ °°°Ô ¸ÂÃã
+			while (stricmp(Reg[jj].reg_name, Sen2.operand[1]))  // ì¶œë°œì§€ì™€ ë ˆì§€ìŠ¤í„° ì´ë¦„ì´ ê°™ê²Œ ë§ì¶¤
 
 				jj++;
 
 			strncpy(strchr(modInstr2[InstrP].mod_reg, '?'), Reg[jj].reg_num, 3);
 
-			//???¸¦ ·¹Áö½ºÅÍ Ç¥ÀÇ °ªÀ¸·Î Ã¤¿ò
+			//???ë¥¼ ë ˆì§€ìŠ¤í„° í‘œì˜ ê°’ìœ¼ë¡œ ì±„ì›€
 
 		}
 
 
 
-		if (strcmp(Instr2[ii].dest, "m") && strcmp(Instr2[ii].sour, "m")) // µµÂøÁö, Ãâ¹ßÁö°¡ µÑ´Ù mÀÌ ¾Æ´Ï¸é
+		if (strcmp(Instr2[ii].dest, "m") && strcmp(Instr2[ii].sour, "m")) // ë„ì°©ì§€, ì¶œë°œì§€ê°€ ë‘˜ë‹¤ mì´ ì•„ë‹ˆë©´
 
 		{
 
 			printf("%02X\t\t%s", btoi(modInstr2[InstrP].mod_reg), buf);
 
-			//InstrÀÇ ¸í·É¾î ÄÚµå¸¦ 16Áø¼ö º¯È¯ ÈÄ Ãâ·Â, ¿ø½Ã ÄÚµå Ãâ·Â
+			//Instrì˜ ëª…ë ¹ì–´ ì½”ë“œë¥¼ 16ì§„ìˆ˜ ë³€í™˜ í›„ ì¶œë ¥, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
 			fprintf(ObjSave, "%02X\t\t%s", btoi(modInstr2[InstrP].mod_reg), buf);
 
 		}
 
-		else// µµÂøÁö or Ãâ¹ßÁö¿¡ ±âÈ£°¡ µé¾î°£ °æ¿ì
+		else// ë„ì°©ì§€ or ì¶œë°œì§€ì— ê¸°í˜¸ê°€ ë“¤ì–´ê°„ ê²½ìš°
 
 		{
 
-			if (!strcmp(Instr2[ii].dest, "m"))  // µµÂøÁö°¡ mÀÎ °æ¿ì
+			if (!strcmp(Instr2[ii].dest, "m"))  // ë„ì°©ì§€ê°€ mì¸ ê²½ìš°
 
 				while (strcmp(Symbol2[kk].symbol, Sen2.operand[0]))kk++;
 
-			// ½Éº¼°ú °°Àº operand¸¦ Ã£À½. Áï ±âÈ£¸¦ Ã£À½
+			// ì‹¬ë³¼ê³¼ ê°™ì€ operandë¥¼ ì°¾ìŒ. ì¦‰ ê¸°í˜¸ë¥¼ ì°¾ìŒ
 
-			else if (!strcmp(Instr2[ii].sour, "m"))  // Ãâ¹ßÁö°¡ mÀÎ °æ¿ì
+			else if (!strcmp(Instr2[ii].sour, "m"))  // ì¶œë°œì§€ê°€ mì¸ ê²½ìš°
 
 				while (strcmp(Symbol2[kk].symbol, Sen2.operand[1]))kk++;
 
-			// ½Éº¼°ú °°Àº operand¸¦ Ã£À½. Áï ±âÈ£¸¦ Ã£À½
+			// ì‹¬ë³¼ê³¼ ê°™ì€ operandë¥¼ ì°¾ìŒ. ì¦‰ ê¸°í˜¸ë¥¼ ì°¾ìŒ
 
-			if (Symbol2[kk].lc == (atoi(Symbol2[kk].data))) // °°À¸¸é, Àç¹èÄ¡ ºÒÇÊ¿ä
+			if (Symbol2[kk].lc == (atoi(Symbol2[kk].data))) // ê°™ìœ¼ë©´, ì¬ë°°ì¹˜ ë¶ˆí•„ìš”
 
 			{
 
@@ -820,7 +821,7 @@ void PassII(char *buf)
 
 			}
 
-			else // ´Ù¸£¸é Àç¹èÄ¡ ÇÊ¿ä
+			else // ë‹¤ë¥´ë©´ ì¬ë°°ì¹˜ í•„ìš”
 
 			{
 
@@ -828,27 +829,27 @@ void PassII(char *buf)
 
 				fprintf(ObjSave, " %02X\t%04XR\t%s", btoi(modInstr2[InstrP].mod_reg), Symbol2[kk].lc, buf);
 
-				//InstrÀÇ ¸í·É¾î ÄÚµå¸¦ 16Áø¼ö º¯È¯ ÈÄ Ãâ·Â, ¿ø½Ã ÄÚµå Ãâ·Â
+				//Instrì˜ ëª…ë ¹ì–´ ì½”ë“œë¥¼ 16ì§„ìˆ˜ ë³€í™˜ í›„ ì¶œë ¥, ì›ì‹œ ì½”ë“œ ì¶œë ¥
 
 			}
 
 		}
 
-		LC2 += atoi(Instr2[ii].ins_len);  //LC=LC+ ¸í·É¾î ±æÀÌ
+		LC2 += atoi(Instr2[ii].ins_len);  //LC=LC+ ëª…ë ¹ì–´ ê¸¸ì´
 
 	}
 
 
 
-	if (i == 0)// ±âÈ£ÀÏ °æ¿ì,
+	if (i == 0)// ê¸°í˜¸ì¼ ê²½ìš°,
 
 	{
 
 		k = 0;
 
-		while (strcmp(Symbol[k].symbol, Sen.label))k++; // symbol[k]°ú label°¡ °°À» ¶§±îÁö ·çÇÁ. °°°Ô ¸¸µê
+		while (strcmp(Symbol[k].symbol, Sen.label))k++; // symbol[k]ê³¼ labelê°€ ê°™ì„ ë•Œê¹Œì§€ ë£¨í”„. ê°™ê²Œ ë§Œë“¦
 
-		if (!strcmp(Symbol[k].word_type, "w")) // Å¸ÀÔÀÌ w¸é
+		if (!strcmp(Symbol[k].word_type, "w")) // íƒ€ì…ì´ wë©´
 
 		{
 
@@ -858,7 +859,7 @@ void PassII(char *buf)
 
 		}
 
-		if (!strcmp(Symbol[k].word_type, "b")) // Å¸ÀÔÀÌ b¸é
+		if (!strcmp(Symbol[k].word_type, "b")) // íƒ€ì…ì´ bë©´
 
 		{
 
@@ -868,7 +869,7 @@ void PassII(char *buf)
 
 		}
 
-		if (*Symbol[k].word_type == 'w')LC += 2;//w¸é ÁÖ¼Ò °ª 2Áõ°¡,b¸é ÁÖ¼Ò °ª 1Áõ°¡
+		if (*Symbol[k].word_type == 'w')LC += 2;//wë©´ ì£¼ì†Œ ê°’ 2ì¦ê°€,bë©´ ì£¼ì†Œ ê°’ 1ì¦ê°€
 
 		else if (*Symbol[k].word_type == 'b')LC += 1;
 
@@ -886,7 +887,7 @@ void PassII(char *buf)
 
 
 
-// ±âÈ£Ç¥ Ãâ·Â
+// ê¸°í˜¸í‘œ ì¶œë ¥
 
 void Symbol_Print()
 
@@ -902,27 +903,27 @@ void Symbol_Print()
 
 	for (i = 0; i<MaxS; i++)
 
-	{ // symbol[k]°ú label°¡ °°À» ¶§±îÁö ·çÇÁ. °°°Ô ¸¸µê
+	{ // symbol[k]ê³¼ labelê°€ ê°™ì„ ë•Œê¹Œì§€ ë£¨í”„. ê°™ê²Œ ë§Œë“¦
 
-		if (!strcmp(Symbol[i].word_type, "w")) // Å¸ÀÔÀÌ w
+		if (!strcmp(Symbol[i].word_type, "w")) // íƒ€ì…ì´ w
 
 		{
 
 			printf("%s\t%X\t\t%d\n", Symbol[i].symbol, Symbol[i].lc, (Symbol[i].lc != atoi(Symbol[i].data) ? 1 : 0));
 
-			// ÁÖ¼Ò °ª, ·¹ÀÌºí °ª, ¿ø½Ã ÄÚµå
+			// ì£¼ì†Œ ê°’, ë ˆì´ë¸” ê°’, ì›ì‹œ ì½”ë“œ
 
 			fprintf(SymbolSave, "%s\t%X\t\t%d\n", Symbol[i].symbol, Symbol[i].lc, (Symbol[i].lc != atoi(Symbol[i].data) ? 1 : 0));
 
 		}
 
-		if (!strcmp(Symbol[i].word_type, "b")) // Å¸ÀÔÀÌ b
+		if (!strcmp(Symbol[i].word_type, "b")) // íƒ€ì…ì´ b
 
 		{
 
 			printf("%s\t%X\t\t%d\n", Symbol[i].symbol, Symbol[i].lc, (Symbol[i].lc != atoi(Symbol[i].data) ? 1 : 0));
 
-			// ÁÖ¼Ò°ª, ·¹ÀÌºí °ª, ¿ø½Ã ÄÚµå
+			// ì£¼ì†Œê°’, ë ˆì´ë¸” ê°’, ì›ì‹œ ì½”ë“œ
 
 			fprintf(SymbolSave, "%s\t%X\t\t%d\n", Symbol[i].symbol, Symbol[i].lc, (Symbol[i].lc != atoi(Symbol[i].data) ? 1 : 0));
 
@@ -950,11 +951,11 @@ void main()
 
 	in = fopen("test1.asm", "r");
 
-	Initialize();  // ·¹Áö½ºÅÍ Ç¥, ¸í·É¾î Ç¥ ÀĞÀ½
+	Initialize();  // ë ˆì§€ìŠ¤í„° í‘œ, ëª…ë ¹ì–´ í‘œ ì½ìŒ
 
 	printf("\nPass1:\n");
 
-	while (1)   // ÆĞ½º 1
+	while (1)   // íŒ¨ìŠ¤ 1
 
 	{
 
@@ -966,11 +967,11 @@ void main()
 
 	}
 
-	Symbol_Print();  // ±âÈ£Ç¥ Ãâ·Â
+	Symbol_Print();  // ê¸°í˜¸í‘œ ì¶œë ¥
 
 
 
-	rewind(in);    // Æ÷ÀÎÅÍ ÃÊ±âÈ­
+	rewind(in);    // í¬ì¸í„° ì´ˆê¸°í™”
 
 	LC = 0;
 
@@ -980,7 +981,7 @@ void main()
 
 	printf("\nPass2:\n");
 
-	while (1)   // ÆĞ½º 2
+	while (1)   // íŒ¨ìŠ¤ 2
 
 	{
 
